@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+
+<div class="container">
+<div class="row">
+    <div class="col-md-5">
+        <div class="card card-body">
+            <button class="btn btn-primary" id="hello">Individual Outstandings</button>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Outstanding</th>
+                    <th scope="col">Paid</th>
+                    <th scope="col">Reminder</th>
+                </tr>
+                </thead>
+                {% for obj in payment_ind %}
+                <tr>
+                    <td>{{ obj.patient }}</td>
+                    <td>{{ obj.outstanding }}</td>
+                    <td>{{ obj.paid }}</td>
+                    <td> <a   class="btn btn-danger" href="{% url 'send_reminder' id=obj.id %}">Send Reminder</a></td>
+
+
+    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-md-7">
+         <button class="btn btn-primary" id="hello">Consultation's Outstanding</button>
+
+        <div class="card card-body">
+            <table class="table table-striped">
+                <thead> 
+                    <th scope="col">Date</th>
+                    <th scope="col">Patient Name</th>
+                    <th scope="col">Paid</th>
+                    <th scope="col">Outstanding</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Invoice</th>
+                </thead>
+                {% for obj in payment_cons %}
+                <tr>
+                    <td>{{ obj.date }}</td>
+                    <td>{{ obj.patient }}</td>
+                    <td>{{ obj.paid }}</td>
+                    <td>{{ obj.outstanding }}</td>
+                    <td>{{ obj.total }}</td>
+                    <td> <a href="{% url 'get_pdf' id=obj.id %}">Invoice</a></td>
+
+
+
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+</div>
